@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">   
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var app = new Vue ({
+           el:'#app',
+           data:{
+               name:'你的名字',
+               content:'安全出行',
+               from:'1',
+               sex:'',
+               food:[],
+               goto:''
+        }
+    })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.number= 'name' >
+        {{name}} <br>
+        <label>
+            男
+            <input v-model="sex" value="male" type="radio">
+        </label>
+        <label>
+            女
+            <input v-model="sex" value="female" type="radio">
+        </label>
+        <br>
+        {{sex}}
+        <br>
+        <label>
+            火车
+            <input v-model="food" value="水果" type="checkbox">
+        </label>
+        <label>
+            高铁
+            <input v-model="food" value="蔬菜" type="checkbox">
+        </label>
+        <br>
+        {{food}}
+        <br>
+        <textarea name=" " v-model= conter></textarea>
+        <br>
+        <select v-model= from >
+            <option value="1">北京</option>
+            <option value="2">上海</option>
+            <option value="3">广州</option>
+        </select>
+        {{from}}
+        <br>
+        <select v-mobel= goto multiple>
+            <option value="1">北京</option>
+            <option value="2">上海</option>
+            <option value="3">深圳</option>
+            <option value="4">广州</option>
+        </select>
+        {{goto}}
+    </div>
+</body>
+</html>
