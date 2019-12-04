@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="lib/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+    * {
+    background: rgba(0, 0, 0, .02);
+    box-sizing: border-box;
+    position: relative;
+}
+.navbar,.header{
+    text-align: center;
+}
+.navbar {
+    background: #db4c3f;
+    color: aliceblue;
+    padding: 5px 0;
+}
+.navbar h1{
+    font-size: 20px;
+    margin: 0;
+}
+
+.header{
+    padding: 20px 0;
+    color:#555;
+}
+
+.wrap{
+     max-width: 768px;
+     margin: 0 auto;
+}
+
+input, button,textarea{
+    border:1px solid rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+input,textarea{
+    width: 100%;
+}
+
+input{
+    display: block;
+   
+}
+    </style>
+</head>
+<body>
+    <div id="main">
+    <div class="navbar">
+        <h1>任务列表:</h1>
+        </div>
+    <div class="header">
+         作业写了没，还在开黑？
+    </div>
+    <form @submit.prevent="add" id="task-form">
+        <div class="wrap">
+
+            <input v-model="current.title" type="text" class="task-input" autocomplete="off">
+            <div class="detail">
+                <textarea v-model='current.desc'></textarea>
+
+            </div>
+            
+            <button type="submit">提交</button>
+
+        </div>
+    </form>
+    <div   class="task-list">
+        <div class="wrap">
+            未完成：
+            <!-- <div v-for="todo in list" class="item"> -->
+                <task :todo="todo"
+                      v-if="!todo.completed"
+                      v-for="(todo,index) in list"
+                      ></task>
+           
+
+    </div>
+    <div class="task-list ">
+        <div class="wrap">
+            已完成：
+            <!-- <div v-if='todo.completed' v-for="(todo, index) in list" class="item completed">
+                    <button @click="toggle_complete(todo.id)">没有完成</button>
+                    {{ todo.title}}                    
+                    <button @click="remove(todo.id)">删除</button>                   
+                    <button @click="set_current(todo)">更新</button>
+            </div> -->
+            <task :todo="todo"
+            v-if="todo.completed"
+            v-for="(todo,index) in list"
+            ></task>
+        </div>
+
+    </div>
+
+    </div>
+</div>
+<template id="task-tpl">
+        <!-- <div v-if="!todo.completed" v-for="(todo,index) in list" class="item"> -->
+        <div class="item">
+                <button @click="action('toggle_complete',todo.id)">未完成</button>
+                {{todo.title}}
+                <button @click='action("remove",todo.id)'>删除</button>
+                <button @click='action("set_current",todo)'>更新</button>
+       </div>
+</template>
+
+    <!-- <script src="lib/vue.js"></script> -->
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+    <script>
+    (function(){
+        window.ms ={
+            set: set,
+            get: get,
+        }
+
+    
+        function set( key, val){
+            localStorage.setItem(key, JSON.stringify(val));
+        }
+        function get(key){
+            var json = localStorage.getItem(key);
+            if(json){
+                return JSON.parse(json);
+            }
+        }
+    })();</script>
+    <script src="js/main.js"></script>
+</body>
+</html>
